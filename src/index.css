@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-green-400 font-mono antialiased;
+    /* Terminal style dark background and green text */
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a; 
+}
+::-webkit-scrollbar-thumb {
+  background: #22c55e; 
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #16a34a; 
+}
