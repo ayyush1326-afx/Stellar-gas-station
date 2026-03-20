@@ -93,3 +93,9 @@ Full transparency with direct links to the transaction on Stellar.expert explore
 
 ## ⚖️ License
 Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 👤 Author
+**Ayush** - [@ayyush1326-afx](https://github.com/ayyush1326-afx)
+
