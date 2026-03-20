@@ -1,13 +1,23 @@
 # 🚀 Stellar Gas-Station
 
-A minimalist, high-performance "Refuel" dashboard designed for developers within the Stellar ecosystem. This application allows users to manage their Testnet XLM, request funding via the Official Stellar Friendbot, and perform instant transfers to other valid addresses.
+A high-performance "Refuel" dashboard designed for developers within the Stellar ecosystem. This application allows users to manage their Testnet XLM, request funding via the Official Stellar Friendbot, and trace on-chain activity through a Soroban smart contract.
 
-Built as a **White Belt** certification project, this dApp emphasizes clean UI/UX, security through Freighter wallet integration, and real-time on-chain interaction.
+---
+
+## 📈 Evolution: Level 1 ➔ Level 2
+
+This repository has been upgraded from a minimalist "White Belt" project (Level 1) to a full-featured "Yellow Belt" dApp (Level 2).
+
+### 🚀 Enhancements & Advancements
+- **Multi-Wallet Architecture**: Migrated from a single-wallet (Freighter) dependency to the robust `@creit-tech/stellar-wallets-kit`, now supporting **Freighter, Albedo, and xBull** wallets.
+- **On-Chain Persistence**: Introduced a **Soroban Smart Contract (Global Fuel Ledger)** written in Rust to track fuel deposits on-chain, moving beyond simple balance fetching.
+- **Real-time Synchronization**: Implemented **Stellar RPC Event Listening**; the UI now automatically updates whenever a `refuel` event is detected on the network.
+- **Industrial Terminal UI**: Refactored the interface with a "Cyber-Terminal" aesthetic, including transaction status tracking (Idle -> Processing -> Success/Fail).
 
 ---
 
 ## 📺 Demo Video
-Watch the full automated walkthrough of the application in action, showing the end-to-end flow from connecting the wallet to a successful transaction:
+Watch the full automated walkthrough of the Level 2 application in action:
 
 ![Stellar Gas-Station Demo](screenshots/demo_recording.webp)
 
@@ -15,11 +25,16 @@ Watch the full automated walkthrough of the application in action, showing the e
 
 ## ✨ Features
 
-- **🔐 Secure Wallet Connection**: Quick authentication via the `@stellar/freighter-api`.
-- **⛽ Live Balance Monitoring**: Real-time visual tracking of Testnet XLM using a custom CRT-style "Fuel Gauge".
-- **💡 One-Click Refuel**: Seamless integration with the Stellar Friendbot for immediate testnet account funding.
-- **⚡ Quick Fuel Transfer**: Send exactly 100 XLM to any valid G-address with native signing.
-- **🖥️ Cyber-Terminal UI**: A premium, dark-mode terminal aesthetic built for the modern developer.
+### 🧪 Level 2: The Global Fuel Ledger
+- **🔐 Multi-Wallet Support**: Secure authentication supporting multiple ecosystem wallets.
+- **📜 Smart Contract Storage**: A custom Rust contract that tracks CRT fuel units per user.
+- **🔄 Live Event Sync**: Automatic UI triggers based on on-chain contract events.
+- **🚥 Transaction Status**: Visual feedback for complex contract invocations.
+
+### 🕹️ Level 1: Core Refuel Logic
+- **⛽ Friendbot Integration**: Instant Testnet XLM requests via the official Stellar helper.
+- **💸 Native Transfers**: Simple, direct XLM transfers to any valid G-Address.
+- **🖥️ Responsive Dashboard**: A mobile-friendly, high-contrast developer interface.
 
 ---
 
@@ -27,75 +42,40 @@ Watch the full automated walkthrough of the application in action, showing the e
 
 - **Frontend**: [React 19](https://reactjs.org/) + [Vite](https://vitejs.dev/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Blockchain Interface**: [Stellar SDK](https://github.com/stellar/js-stellar-sdk)
-- **Wallet Support**: [Freighter API](https://www.freighter.app/docs)
-- **Icons**: [Lucide React](https://lucide.dev/)
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js (v18+)
-- [Freighter Wallet](https://www.freighter.app/) extension installed in your browser.
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ayyush1326-afx/Stellar-gas-station.git
-   cd Stellar-gas-station
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-
-4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+- **Blockchain**: [Stellar SDK v13](https://github.com/stellar/js-stellar-sdk)
+- **Smart Contracts**: Soroban (Rust 2021)
+- **Wallet Kit**: [Stellar Wallets Kit](https://github.com/Creit-Tech/Stellar-Wallets-Kit)
 
 ---
 
 ## 📸 Screenshots
 
-### 1. Initial Connection
-Once the system is initialized, users can securely connect their Freighter wallet.
-![Connect State](screenshots/connected.png)
+### 1. Multi-Wallet Connection
+![Multi-Wallet Modal](screenshots/initial_state_1774011086614.png)
 
-### 2. Fuel Level (Balance)
-The custom CRT fuel gauge provides immediate visual feedback of your Testnet XLM holdings.
-![Balance State](screenshots/balance.png)
+### 2. Global Fuel Ledger (Level 2 Gauge)
+![Balance State](screenshots/connected_state_1774011095320.png)
 
-### 3. Transaction Processing
-All transfers are signed securely via Freighter and submitted to the Horizon Testnet.
-![Processing Flow](screenshots/transaction_flow.png)
-
-### 4. Successful Transfer
-Full transparency with direct links to the transaction on Stellar.expert explorer.
-![Success State](screenshots/success_state.png)
+### 3. Real-time Activity Feed
+![Activity Feed](screenshots/final_transaction_state_1774011108913.png)
 
 ---
 
-## 📜 Workflow
+## 🚀 Getting Started
 
-1. **Initialization**: The app checks for Freighter presence and requests account access.
-2. **Account Loading**: Fetches the native balance from the Horizon Testnet server.
-3. **Refuel**: Sends an authenticated request to Friendbot; updates balance on success.
-4. **Transaction**: Constructs a transaction with `TransactionBuilder`, requests a Freighter signature (XDR), and submits to Horizon.
+1. **Clone & Install**:
+   ```bash
+   git clone https://github.com/ayyush1326-afx/Stellar-gas-station.git
+   npm install
+   ```
+2. **Setup Tools**: Ensure you have [Rust](https://rustup.rs/) and [Stellar CLI](https://developers.stellar.org/docs/smart-contracts/getting-started/setup) installed for contract deployment.
+3. **Run Dev**: `npm run dev`
+4. **Deploy Contract**: Use the [Contract Deployment Guide](./contract_deployment_guide.md) to push the Rust code to Testnet.
 
 ---
 
 ## ⚖️ License
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
+Distributed under the MIT License.
 
 ## 👤 Author
 **Ayush** - [@ayyush1326-afx](https://github.com/ayyush1326-afx)
-

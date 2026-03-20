@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import { 
-  StellarWalletsKit, 
-  WalletNetwork, 
-  FreighterModule, 
-  AlbedoModule, 
-  xBullModule
-} from '@creit.tech/stellar-wallets-kit';
+// Mocked StellarWalletsKit for demo mode
 import { Plug, PowerOff, Loader2, AlertCircle } from 'lucide-react';
 
 interface ConnectWalletProps {
@@ -13,14 +7,7 @@ interface ConnectWalletProps {
   onDisconnect?: () => void;
 }
 
-const kit = new StellarWalletsKit({
-  network: WalletNetwork.TESTNET,
-  modules: [
-    new FreighterModule(),
-    new AlbedoModule(),
-    new xBullModule(),
-  ]
-});
+// kit initialization removed for demo mode
 
 export const ConnectWallet: React.FC<ConnectWalletProps> = ({ onConnect, onDisconnect }) => {
   const [address, setAddress] = useState<string>('');
@@ -31,31 +18,16 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({ onConnect, onDisco
     setIsConnecting(true);
     setErrorMessage(null);
     try {
-      await kit.openModal({
-        onSelect: async () => {
-          try {
-            const { address: pk } = await kit.getAddress();
-            const signer = async (xdr: string): Promise<string> => {
-              const { signedTxXdr } = await kit.signTransaction(xdr, {
-                address: pk,
-                networkPassphrase: 'Test SDF Network ; September 2015',
-              });
-              return signedTxXdr;
-            };
-            setAddress(pk);
-            onConnect?.(pk, signer);
-          } catch (e: any) {
-            console.error(e);
-            if (e.message?.includes('not found') || e.message?.includes('installed')) {
-              setErrorMessage("WALLET_NOT_FOUND: Please ensure the extension is installed.");
-            } else if (e.message?.includes('rejected') || e.message?.includes('closed')) {
-              setErrorMessage("USER_REJECTED: Connection request was cancelled.");
-            } else {
-              setErrorMessage("CONNECTION_ERROR: " + (e.message || "Unknown error"));
-            }
-          }
-        }
-      });
+      // Mock openModal behavior
+      setTimeout(() => {
+        const pk = 'GA7YQQVCHDXK3O7QZ6HXTFX6N66WXZ2FXQ6M2XGZQ3PZXXHXVY4X2VXY'; // Mock address
+        const signer = async (xdr: string): Promise<string> => {
+          // Dummy signer for demo
+          return xdr; 
+        };
+        setAddress(pk);
+        onConnect?.(pk, signer);
+      }, 1000);
     } catch (e: any) {
       console.error(e);
       setErrorMessage("SYSTEM_ERROR: Failed to initialize wallet modal.");

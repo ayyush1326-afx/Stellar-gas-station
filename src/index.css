@@ -2,8 +2,11 @@
 
 @layer base {
   body {
-    @apply bg-gray-950 text-green-400 font-mono antialiased;
-    /* Terminal style dark background and green text */
+    background-color: #030712; /* bg-gray-950 */
+    color: #22c55e; /* text-green-500 */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 

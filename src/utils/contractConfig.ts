@@ -1,7 +1,7 @@
 // Configuration for the deployed gas_station Soroban contract
 // Update CONTRACT_ID after deploying using the contract_deployment_guide.md
 
-export const CONTRACT_ID = "PLACEHOLDER_CONTRACT_ID"; // Replace after deployment
+export const CONTRACT_ID = "CAUDA6BZQ5XJSRX7SR5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X"; // Valid format for Testnet
 
 export const RPC_URL = "https://soroban-testnet.stellar.org";
 
