@@ -3,12 +3,15 @@ import { ConnectWallet } from './components/ConnectWallet';
 import { FuelGauge } from './components/FuelGauge';
 import { RefuelAction } from './components/RefuelAction';
 import { TransferAction } from './components/TransferAction';
+import { DepositFuel } from './components/DepositFuel';
+import { ActivityFeed } from './components/ActivityFeed';
 import { useStellar } from './hooks/useStellar';
 import { Terminal, RefreshCw } from 'lucide-react';
 
 function App() {
   const [address, setAddress] = useState<string>('');
-  const { balance, fetchBalance, isLoadingBalance, refuel, isRefueling } = useStellar(address);
+  const [signTx, setSignTx] = useState<((xdr: string) => Promise<string>) | undefined>(undefined);
+  const { balance, fetchBalance, isLoadingBalance, refuel, isRefueling, fuelBalance, deposit, refuelEvents } = useStellar(address, signTx);
 
   return (
     <div className="min-h-screen bg-[#0D1117] text-green-500 font-mono p-4 md:p-8 flex flex-col items-center">
@@ -28,8 +31,8 @@ function App() {
             </div>
           </div>
           <ConnectWallet 
-            onConnect={(addr) => setAddress(addr)}
-            onDisconnect={() => setAddress('')} 
+            onConnect={(addr, signer) => { setAddress(addr); setSignTx(() => signer); }}
+            onDisconnect={() => { setAddress(''); setSignTx(undefined); }} 
           />
         </header>
 
@@ -54,8 +57,16 @@ function App() {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                <DepositFuel onDeposit={deposit} fuelBalance={fuelBalance} />
                 <RefuelAction onRefuel={refuel} isRefueling={isRefueling} />
+              </div>
+
+              <div className="mt-8">
                 <TransferAction senderAddress={address} onSuccess={fetchBalance} />
+              </div>
+
+              <div className="mt-8">
+                <ActivityFeed events={refuelEvents} />
               </div>
 
             </div>
@@ -66,7 +77,7 @@ function App() {
               </div>
               <h2 className="text-xl tracking-widest text-green-600 mb-2">SYSTEM OFFLINE</h2>
               <p className="text-green-800 text-sm max-w-md">
-                Please initialize connection using Freighter wallet to access the refuel console and manage Testnet XLM.
+                Connect your Freighter, Albedo, or xBull wallet to access the refuel console and manage Testnet XLM.
               </p>
             </div>
           )}
