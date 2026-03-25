@@ -1,40 +1,72 @@
 # 🚀 Stellar Gas-Station
 
-A high-performance "Refuel" dashboard designed for developers within the Stellar ecosystem. This application allows users to manage their Testnet XLM, request funding via the Official Stellar Friendbot, and trace on-chain activity through a Soroban smart contract.
+## 📖 Overview
+A high-performance "Refuel" dashboard designed for developers within the Stellar ecosystem. This application allows users to manage their Testnet XLM, request funding via the Official Stellar Friendbot, and trace on-chain activity through a Soroban smart contract. 
+
+This repository showcases the evolution of a dApp from a minimalist "White Belt" project (Level 1) to a full-featured "Yellow Belt" dApp (Level 2), highlighting the integration of on-chain persistence and a multi-wallet architecture.
 
 ---
 
-## 📈 Evolution: Level 1 ➔ Level 2
+## 🌐 Live Links
 
-This repository has been upgraded from a minimalist "White Belt" project (Level 1) to a full-featured "Yellow Belt" dApp (Level 2).
+- **Live Application (Vercel)**: `[Insert Vercel Link Here]` *(Please update with your live Vercel URL)*
+- **Deployed Smart Contract ID (Testnet)**: `CAUDA6BZQ5XJSRX7SR5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X` *(Default from config, update if redeployed)*
 
-### 🚀 Enhancements & Advancements
-- **Multi-Wallet Architecture**: Migrated from a single-wallet (Freighter) dependency to the robust `@creit-tech/stellar-wallets-kit`, now supporting **Freighter, Albedo, and xBull** wallets.
-- **On-Chain Persistence**: Introduced a **Soroban Smart Contract (Global Fuel Ledger)** written in Rust to track fuel deposits on-chain, moving beyond simple balance fetching.
-- **Real-time Synchronization**: Implemented **Stellar RPC Event Listening**; the UI now automatically updates whenever a `refuel` event is detected on the network.
-- **Industrial Terminal UI**: Refactored the interface with a "Cyber-Terminal" aesthetic, including transaction status tracking (Idle -> Processing -> Success/Fail).
+---
+
+## 🏗️ Application Workflow
+
+1. **Connect Wallet**: The user logs in securely using one of the supported Stellar wallets (Freighter, Albedo, xBull).
+2. **Dashboard Initialization**: The app instantly fetches the current XLM balance using the Stellar Horizon API and queries the connected Soroban smart contract for the user's on-chain "Fuel" status.
+3. **Refuel Request**: When the user requests more testnet XLM:
+   - **Level 1** execution calls the Stellar Friendbot to trigger a native network transfer.
+   - **Level 2** execution interacts with the Soroban Smart Contract to permanently record the "Fuel" points on the blockchain ledger.
+4. **Real-Time Monitoring**: The UI actively tracks the transaction state in real-time (Idle ➔ Processing ➔ Success/Fail).
+
+---
+
+## 🥇 Level 1: White Belt (Core Refuel Logic)
+
+The foundation of the project focuses on essential wallet interactions and direct network queries.
+
+### ✨ Features
+- **⛽ Friendbot Integration**: Instant Testnet XLM requests via the official Stellar helper.
+- **💸 Native Transfers**: Simple, direct XLM transfers to any valid G-Address.
+- **🖥️ Responsive Dashboard**: A mobile-friendly, high-contrast developer interface.
+
+### 📸 Level 1 Previews
+*The initial setup connecting a basic Freighter wallet and checking horizon endpoints.*
+![Level 1 Concept](screenshots/initial_state_1774011086614.png)
+
+---
+
+## 🥈 Level 2: Yellow Belt (Global Fuel Ledger)
+
+The upgraded state of the project introducing complex smart contracts and generalized multi-wallet access.
+
+### ✨ Features
+- **🔐 Multi-Wallet Architecture**: Migrated from a single-wallet (Freighter) dependency to the robust `@creit-tech/stellar-wallets-kit`, supporting **Freighter, Albedo, and xBull** wallets.
+- **📜 On-Chain Persistence (Smart Contract)**: Introduced a **Soroban Smart Contract (Global Fuel Ledger)** written in Rust to track CRT fuel units per user.
+- **🔄 Real-time Synchronization**: Implemented **Stellar RPC Event Listening**; the UI automatically updates whenever a `refuel` event is detected.
+- **🚥 Industrial Terminal UI & Transaction Status**: Refactored the interface with a "Cyber-Terminal" aesthetic and provided visual feedback for complex invocations.
+
+### 📸 Level 2 Previews
+
+#### 1. Multi-Wallet Connection
+![Multi-Wallet Modal](screenshots/initial_state_1774011086614.png)
+
+#### 2. Global Fuel Ledger (Level 2 Gauge)
+![Balance State](screenshots/connected_state_1774011095320.png)
+
+#### 3. Real-time Activity Feed
+![Activity Feed](screenshots/final_transaction_state_1774011108913.png)
 
 ---
 
 ## 📺 Demo Video
-Watch the full automated walkthrough of the Level 2 application in action:
+Watch the full automated walkthrough of the application in action:
 
 ![Stellar Gas-Station Demo](screenshots/demo_recording.webp)
-
----
-
-## ✨ Features
-
-### 🧪 Level 2: The Global Fuel Ledger
-- **🔐 Multi-Wallet Support**: Secure authentication supporting multiple ecosystem wallets.
-- **📜 Smart Contract Storage**: A custom Rust contract that tracks CRT fuel units per user.
-- **🔄 Live Event Sync**: Automatic UI triggers based on on-chain contract events.
-- **🚥 Transaction Status**: Visual feedback for complex contract invocations.
-
-### 🕹️ Level 1: Core Refuel Logic
-- **⛽ Friendbot Integration**: Instant Testnet XLM requests via the official Stellar helper.
-- **💸 Native Transfers**: Simple, direct XLM transfers to any valid G-Address.
-- **🖥️ Responsive Dashboard**: A mobile-friendly, high-contrast developer interface.
 
 ---
 
@@ -48,29 +80,51 @@ Watch the full automated walkthrough of the Level 2 application in action:
 
 ---
 
-## 📸 Screenshots
+## 📁 Project Folder Structure
 
-### 1. Multi-Wallet Connection
-![Multi-Wallet Modal](screenshots/initial_state_1774011086614.png)
-
-### 2. Global Fuel Ledger (Level 2 Gauge)
-![Balance State](screenshots/connected_state_1774011095320.png)
-
-### 3. Real-time Activity Feed
-![Activity Feed](screenshots/final_transaction_state_1774011108913.png)
+```text
+Stellar-gas-station/
+├── contracts/          # Soroban Smart Contract (Rust source code)
+├── public/             # Static public assets
+├── screenshots/        # Demo media (videos & images)
+├── src/                # React Frontend Source
+│   ├── assets/         # App icons and media
+│   ├── components/     # Reusable UI components (Modals, Buttons)
+│   ├── hooks/          # Custom React hooks (useStellar)
+│   ├── utils/          # Helper functions & Contract Config
+│   ├── App.tsx         # Main Application Component
+│   ├── index.css       # Tailwind entry styles
+│   └── main.tsx        # React root entry
+├── package.json        # Dependencies & NPM Scripts
+├── tailwind.config.js  # Tailwind CSS Config
+└── vite.config.ts      # Vite Bundler Config
+```
 
 ---
 
 ## 🚀 Getting Started
 
-1. **Clone & Install**:
+1. **Clone the Repository**:
    ```bash
    git clone https://github.com/ayyush1326-afx/Stellar-gas-station.git
+   cd Stellar-gas-station
+   ```
+
+2. **Install Dependencies**:
+   ```bash
    npm install
    ```
-2. **Setup Tools**: Ensure you have [Rust](https://rustup.rs/) and [Stellar CLI](https://developers.stellar.org/docs/smart-contracts/getting-started/setup) installed for contract deployment.
-3. **Run Dev**: `npm run dev`
-4. **Deploy Contract**: Use the [Contract Deployment Guide](./contract_deployment_guide.md) to push the Rust code to Testnet.
+
+3. **Environment & Tools**: 
+   Ensure you have [Rust](https://rustup.rs/) and [Stellar CLI](https://developers.stellar.org/docs/smart-contracts/getting-started/setup) installed to compile or deploy the smart contract on your own.
+
+4. **Run the Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+5. **Deploy Contract (Optional)**: 
+   Explore the `contracts/` directory or reference your local deployment guides to push the Rust code to the Testnet.
 
 ---
 
