@@ -9,7 +9,7 @@ This repository showcases the evolution of a dApp from a minimalist "White Belt"
 
 ## 🌐 Live Links
 
-- **Live Application (Vercel)**: `[Insert Vercel Link Here]` *(Please update with your live Vercel URL)*
+- **Live Application (Vercel)**: [https://stellarayush.vercel.app](https://stellarayush.vercel.app)
 - **Deployed Smart Contract ID (Testnet)**: `CAUDA6BZQ5XJSRX7SR5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X7S5X` *(Default from config, update if redeployed)*
 
 ---
@@ -78,29 +78,7 @@ Watch the full automated walkthrough of the application in action:
 - **Smart Contracts**: Soroban (Rust 2021)
 - **Wallet Kit**: [Stellar Wallets Kit](https://github.com/Creit-Tech/Stellar-Wallets-Kit)
 
----
 
-## 📁 Project Folder Structure
-
-```text
-Stellar-gas-station/
-├── contracts/          # Soroban Smart Contract (Rust source code)
-├── public/             # Static public assets
-├── screenshots/        # Demo media (videos & images)
-├── src/                # React Frontend Source
-│   ├── assets/         # App icons and media
-│   ├── components/     # Reusable UI components (Modals, Buttons)
-│   ├── hooks/          # Custom React hooks (useStellar)
-│   ├── utils/          # Helper functions & Contract Config
-│   ├── App.tsx         # Main Application Component
-│   ├── index.css       # Tailwind entry styles
-│   └── main.tsx        # React root entry
-├── package.json        # Dependencies & NPM Scripts
-├── tailwind.config.js  # Tailwind CSS Config
-└── vite.config.ts      # Vite Bundler Config
-```
-
----
 
 ## 🚀 Getting Started
 

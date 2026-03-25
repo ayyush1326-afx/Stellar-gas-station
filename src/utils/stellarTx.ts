@@ -1,6 +1,6 @@
 // Mocked for demo mode
 
-export async function sendStellarTransaction(senderAddress: string, destinationAddress: string, amount: string) {
+export async function sendStellarTransaction(_senderAddress: string, _destinationAddress: string, _amount: string) {
   try {
     // Mocking transaction for demo mode
     await new Promise(resolve => setTimeout(resolve, 1500));
